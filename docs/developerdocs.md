@@ -12,6 +12,14 @@ Repository structure
 - apps/ : Electron wiring and wrappers
 - docs/ : this documentation
 - tests/ : tests and utilities
+- monorepo layout and tooling notes
+- frontend/ : React + TS SPA
+- backend/ : FastAPI app
+- common/ : shared types and contracts
+- sync-adapter/ : pluggable adapters (TS frontend; Python adapters optional)
+- apps/ : Electron wiring and wrappers
+- docs/ : this documentation
+- tests/ : tests and utilities
 
 Getting started
 - Prereqs, environment setup, and run commands for frontend and backend
