@@ -1,0 +1,17 @@
+{
+  "name": "pmq-offline-sync",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Open-source PMQ-inspired project management with offline-first sync adapter",
+  "license": "MIT",
+  "type": "commonjs",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "sync-adapter",
+    "common",
+    "apps",
+    "docs",
+    "tests"
+  ]
+}
