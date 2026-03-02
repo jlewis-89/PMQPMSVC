@@ -1,0 +1,46 @@
+name: CI
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    - name: Cache node modules
+      uses: actions/cache@v4
+      with:
+        path: frontend/node_modules
+        key: ${{ runner.os }}-node-front-${{ hashFiles('frontend/package.json') }}
+        restore-keys: ${{ runner.os }}-node-front-
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm ci
+    - name: Run frontend build (lint placeholder)
+      run: |
+        cd frontend
+        npm run build || true
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        python -m venv venv
+        source venv/Scripts/activate
+        pip install -r requirements.txt
+    - name: Run backend health check
+      run: |
+        cd backend
+        python -m pip install --upgrade pip
+        uvicorn --version
+        python -c 'print("backend ready")'

@@ -68,3 +68,62 @@ def create_subtask(project_id: str, task_id: str, payload: SubTaskCreate):
 @app.get("/api/projects/{project_id}/tasks/{task_id}/subtasks")
 def list_subtasks(project_id: str, task_id: str):
     return [s for s in subtasks_store.values() if s.get("task_id") == task_id]
+
+@app.post("/api/projects/{project_id}/costs")
+def create_cost(project_id: str, payload: CostCreate):
+    import uuid
+    c = payload.dict()
+    c["id"] = str(uuid.uuid4())
+    c["project_id"] = project_id
+    costs_store[c["id"]] = c
+    return c
+
+
+@app.get("/api/projects/{project_id}/costs")
+def list_costs(project_id: str):
+    return [c for c in costs_store.values() if c.get("project_id") == project_id]
+
+
+@app.post("/api/projects/{project_id}/earned-value")
+def create_earned_value(project_id: str, payload: EarnedValueCreate):
+    import uuid
+    ev = payload.dict()
+    ev["id"] = str(uuid.uuid4())
+    ev["project_id"] = project_id
+    earned_store[ev["id"]] = ev
+    return ev
+
+
+@app.get("/api/projects/{project_id}/earned-value")
+def list_earned_value(project_id: str):
+    return [e for e in earned_store.values() if e.get("project_id") == project_id]
+
+
+@app.post("/api/projects/{project_id}/mindmaps")
+def create_mindmap(project_id: str, payload: MindMapNodeCreate):
+    import uuid
+    node = payload.dict()
+    node["id"] = str(uuid.uuid4())
+    node["project_id"] = project_id
+    mindmaps_store[node["id"]] = node
+    return node
+
+
+@app.get("/api/projects/{project_id}/mindmaps")
+def list_mindmaps(project_id: str):
+    return [m for m in mindmaps_store.values() if m.get("project_id") == project_id]
+
+
+@app.post("/api/projects/{project_id}/calendar")
+def create_calendar_event(project_id: str, payload: CalendarEventCreate):
+    import uuid
+    ev = payload.dict()
+    ev["id"] = str(uuid.uuid4())
+    ev["project_id"] = project_id
+    calendar_store[ev["id"]] = ev
+    return ev
+
+
+@app.get("/api/projects/{project_id}/calendar")
+def list_calendar_events(project_id: str):
+    return [c for c in calendar_store.values() if c.get("project_id") == project_id]

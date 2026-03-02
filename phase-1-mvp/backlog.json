@@ -1,0 +1,7 @@
+[
+  {"id": "US-01", "title": "Create phase-1-mvp branch and sprint plan", "status": "todo", "estimate_hours": 4},
+  {"id": "US-02", "title": "Implement MVP backend endpoints for tasks/costs/EV/mindmap/calendar", "status": "todo", "estimate_hours": 40},
+  {"id": "US-03", "title": "Frontend skeleton: WBS, Gantt, MindMap, Calendar views", "status": "todo", "estimate_hours": 60},
+  {"id": "US-04", "title": "SyncAdapter Google Drive integration scaffold", "status": "todo", "estimate_hours": 40},
+  {"id": "US-05", "title": "PMQ templates - create customizable templates stored per user", "status": "todo", "estimate_hours": 20}
+]
