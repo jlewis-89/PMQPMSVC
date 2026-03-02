@@ -1,0 +1,27 @@
+Phase 1 MVP — Sprint 1 Tasks
+
+- Backend
+  - [ ] Expand TaskCreate/TaskRead validation with Pydantic rules
+  - [ ] Add input validation for SubTaskCreate and MindMapNodeCreate
+  - [ ] Implement CRUD for Tasks with proper error handling and status codes
+  - [ ] Implement Costs, EarnedValue, MindMaps, Calendar endpoints with basic tests
+- Frontend
+  - [ ] Create route navigation for WBS, Gantt, MindMap, Calendar, PMQ templates
+  - [ ] Implement WBS list rendering (static data to start)
+  - [ ] Build Gantt scaffold with static bars and drag placeholders
+  - [ ] Mind Map placeholder; connect to tasks (static)
+  - [ ] Calendar placeholder; show static events
+  - [ ] PMQ Templates UI: create a sample template and allow editing
+- Sync Adapter
+  - [ ] Implement Google Drive adapter methods for a simple push/pull flow (mocked)
+  - [ ] Document the extension path for adding new adapters
+- AI Starter
+  - [ ] Implement rule-based intent parsing for a few commands (e.g., create task)
+- Handover
+  - [ ] Hook up Markdown handover export for a sample project
+- Tests & CI
+  - [ ] Add unit tests for backend models and endpoints (pytest)
+  - [ ] Extend CI to run tests and lint
+- Documentation
+  - [ ] Finalize Phase 1 MVP backlog and sprint plan
+  - [ ] Expand developerdocs with run/build steps for MVP
