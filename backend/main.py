@@ -43,6 +43,10 @@ def to_task_read(data: dict) -> TaskRead:
 def health():
     return {"status": "ok"}
 
+@app.get("/api/auth/whoami")
+def whoami(user: dict = Depends(get_current_user)):
+    return user
+
 
 @app.post("/api/projects")
 def create_project():

@@ -1,37 +1,18 @@
-# Phase 1 MVP Sprint 2 Backlog (Expanded)
+Phase 1 MVP Sprint 2 Backlog (Expanded)
 
-Sprint Goal
-- Flesh out MVP surface: complete CRUD for core entities, introduce ICS export groundwork, expand PMQ templates, and extend CI/test coverage.
+- US-11 MVP: Backend CRUD completion for Task/SubTask/Cost/EarnedValue/MindMap/Calendar with validations
+- US-12 Backend: JSON export endpoint implemented and tested
+- US-13 Frontend: Bind VMs to UI; test with backend data; implement ICS export wiring
+- US-14 Sync: Implement actual delta push/pull path; tests with mocked provider
+- US-15 PMQ: Extend templates; per-user editing/export capabilities
+- US-16 AI: Expand intents; more actionable prompts
+- US-17 Handover: Markdown export finalized; PDF path planning
+- US-18 CI/Testing: Expand test coverage and automate tests
+- US-19 Packaging: Electron packaging planning; installers planning
 
-Epics
-- MVP Core API completion: Task/SubTask/Cost/EarnedValue/MindMap/Calendar CRUD with validations
-- UI polish: wire WBS/Gantt/MindMap/Calendar/PMQ templates to live endpoints with real data
-- Sync: move from scaffold to a working delta push/pull routine with a documented extension path
-- PMQ: expand starter templates and per-user editing capabilities
-- AI: more intents and safer local execution
-- Handover/Docs: finalize Markdown export and begin PDF export scaffolding
-- CI/Testing: strengthen tests, ensure CI passes on PRs
-
-Key User Stories (examples; real IDs to be aligned in Sprint 2 planning)
-- US-11 Backend: Validate TaskCreate/SubTaskCreate; reject invalid payloads (422)
-- US-12 Backend: Implement GET endpoints for all MVP lists per project
-- US-13 Frontend: Bind WBS, Gantt, MindMap, Calendar to API data; support editing
-- US-14 Sync: Implement functional push/pull; delta application
-- US-15 PMQ: Template editor improvements and per-user storage
-- US-16 AI: Expand intents; provide safer prompts and results
-- US-17 Handover: Markdown export to a finalized structure with template data
-- US-18 CI: Full unit/integration test suite for MVP surface
-
-Deliverables for Sprint 2
-- Completed MVP surface for CRUD operations and data flows
-- ICS export groundwork and calendar integration tapestry
-- Expanded templates and per-user storage
-- Realistic Sync push/pull with delta application (mock or real depending on provider)
-- Expanded AI intents and action surface
-- Handover docs exportable in Markdown; initial PDF path skeleton
-- CI/test suite enhancements and artifact tests
-
-Assumptions
-- Phase 1 MVP scope stays within two-week cadence; no major feature creep
-- Google Drive remains core provider with extension path clearly documented
-- Local offline-first remains intact; IPC/Service Worker parity blocks not encountered
+Acceptance criteria (summary)
+- Endpoints implemented; data flows across MVP surface; JSON export returns structured data
+- ICS export returns valid ICS payload
+- UI binds to API; per-user PMQ templates editable; AI intents produce actionable items
+- CI gates pass with updated test coverage
+- Electron packaging plan is finalized with installer steps
