@@ -16,6 +16,25 @@ earned_store: dict = {}
 mindmaps_store: dict = {}
 calendar_store: dict = {}
 
+@app.get("/api/projects")
+def list_projects():
+    return list(projects_store.values())
+
+@app.put("/api/projects/{project_id}")
+def update_project(project_id: str, payload: dict):
+    if project_id not in projects_store:
+        raise HTTPException(status_code=404, detail="Project not found")
+    proj = projects_store[project_id]
+    proj.update(payload or {})
+    return proj
+
+@app.delete("/api/projects/{project_id}")
+def delete_project(project_id: str):
+    if project_id in projects_store:
+        del projects_store[project_id]
+        return {"status": "deleted"}
+    raise HTTPException(status_code=404, detail="Project not found")
+
 
 def to_task_read(data: dict) -> TaskRead:
     return TaskRead(**data)
@@ -127,3 +146,22 @@ def create_calendar_event(project_id: str, payload: CalendarEventCreate):
 @app.get("/api/projects/{project_id}/calendar")
 def list_calendar_events(project_id: str):
     return [c for c in calendar_store.values() if c.get("project_id") == project_id]
+
+@app.get("/api/projects/{project_id}/calendar/ics")
+def calendar_ics(project_id: str):
+    # Minimal ICS export placeholder for a per-project calendar
+    ics = (
+        "BEGIN:VCALENDAR\r\n"
+        "VERSION:2.0\r\n"
+        "PRODID:-//PMQPMSVC//Calendar//EN\r\n"
+        "BEGIN:VEVENT\r\n"
+        "DTSTART:20260316T090000Z\r\n"
+        "DTEND:20260316T100000Z\r\n"
+        "SUMMARY:Kickoff\r\n"
+        "LOCATION:Online\r\n"
+        "DESCRIPTION:Project kickoff\r\n"
+        "END:VEVENT\r\n"
+        "END:VCALENDAR\r\n"
+    )
+    from fastapi.responses import Response
+    return Response(ics, media_type="text/calendar")

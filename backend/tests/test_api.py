@@ -39,3 +39,34 @@ def test_create_project_and_task_and_list():
     assert r.status_code == 200
     tasks = r.json()
     assert isinstance(tasks, list)
+
+def test_list_and_update_and_delete_project():
+    # create a project
+    r = client.post("/api/projects")
+    assert r.status_code == 200
+
+def test_calendar_ics_export():
+    # Create a project to scope ICS export
+    r = client.post("/api/projects")
+    assert r.status_code == 200
+    data = r.json()
+    project_id = data.get("id")
+    assert project_id
+    r = client.get(f"/api/projects/{project_id}/calendar/ics")
+    assert r.status_code == 200
+    # ICS content should be present
+    text = r.text
+    assert text is not None and "BEGIN:VCALENDAR" in text
+    proj = r.json()
+    pid = proj.get("id")
+    assert pid
+    # list projects
+    r = client.get("/api/projects")
+    assert r.status_code == 200
+    assert isinstance(r.json(), list)
+    # update project minimal
+    r = client.put(f"/api/projects/{pid}", json={"name": "Updated Project"})
+    assert r.status_code == 200
+    # delete project
+    r = client.delete(f"/api/projects/{pid}")
+    assert r.status_code == 200

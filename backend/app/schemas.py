@@ -1,5 +1,5 @@
 from typing import Optional, List
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, validator
 
 
 class UserBase(BaseModel):
@@ -19,9 +19,23 @@ class TaskCreate(BaseModel):
     end_date: Optional[str] = None
     duration_days: Optional[int] = None
     estimate_hours: Optional[float] = None
-    priority: str = 'medium'
-    status: str = 'pending'
+    priority: str = Field('medium', description='priority level')
+    status: str = Field('pending', description='task status')
     assignee_id: Optional[str] = None
+
+    @validator('end_date')
+    def end_date_after_start(cls, v, values):
+        s = values.get('start_date')
+        if s and v:
+            if v < s:
+                raise ValueError('end_date must be on or after start_date')
+        return v
+
+    @validator('duration_days')
+    def duration_positive(cls, v):
+        if v is not None and v < 0:
+            raise ValueError('duration_days must be non-negative')
+        return v
 
 
 class TaskRead(BaseModel):
@@ -47,6 +61,14 @@ class SubTaskCreate(BaseModel):
     duration_days: Optional[int] = None
     estimate_hours: Optional[float] = None
     status: str = 'pending'
+
+    @validator('end_date')
+    def end_date_after_start(cls, v, values):
+        s = values.get('start_date')
+        if s and v:
+            if v < s:
+                raise ValueError('end_date must be on or after start_date')
+        return v
 
 
 class SubTaskRead(BaseModel):
