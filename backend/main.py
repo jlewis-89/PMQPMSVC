@@ -165,3 +165,18 @@ def calendar_ics(project_id: str):
     )
     from fastapi.responses import Response
     return Response(ics, media_type="text/calendar")
+
+@app.get("/api/export/json")
+def export_json():
+    from datetime import datetime
+    export = {
+        "exported_at": datetime.utcnow().isoformat() + "Z",
+        "projects": list(projects_store.values()),
+        "tasks": list(tasks_store.values()),
+        "subtasks": list(subtasks_store.values()),
+        "costs": list(costs_store.values()),
+        "earned_value": list(earned_store.values()),
+        "mindmaps": list(mindmaps_store.values()),
+        "calendar": list(calendar_store.values()),
+    }
+    return export
